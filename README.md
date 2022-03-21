@@ -26,165 +26,133 @@ npm install -D eslint
 npx eslint --init
 ```
 ## Config ESLint:
-Configure eslint according to your project
+### Configure eslint according to your project
 
-- defining for what purpose to use eslint
+✔️ Defining for what purpose to use eslint:
 <p align="left">
-  <img src="images/q1.png" />
+  <img src="img/q1.png" />
 </p>
 
-- Create a *pages.js* to map all page files to be exported:
-```
-const pages = {
-    home: require('./home'),
-    login: require('./login'),
-    topNav: require('./top_nav'),
-}
-
-module.exports = pages
-```
-
-## Install and configure Cypress dotenv:
-The <a href="https://www.npmjs.com/package/cypress-dotenv">Cypress dotenv</a> is a NPM library that will load any environment variables defined in your `.env` file so you can access them via Cypress.env() from within your tests as you would expect.
-
-- Install the Cypress dotenv:
-```
-npm i cypress-dotenv
-```
-
-- Setup the plugin in the *cypress/plugins/index.js*
-```
-/// <reference types="cypress" />
-
-const dotenvPlugin = require('cypress-dotenv');
-module.exports = (on, config) => {
-  config = dotenvPlugin(config)
-  return config
-}
-```
-
-- Create and add variable in the *cypress.env.json* file in the root:
-Since we are going to login in the application, create an user and add the email and login in this file. This file won't be commited since it contains sensitive data.
-```
-{
-  "AUTH_EMAIL": "@yourEmail",
-  "AUTH_PASSWORD": "@yourPassword",
-  "AUTH_USERNAME": "@yourUsername"
-}
-```
-
-## Create a support file
-- Create a *setup.js* file in *cypress/support*
-The Cypress will read this file when started, so we can define some data to be used in all tests through a global hook, such as a *beforeEach()* with an object that contains the **pages** and **user** data. And also, we can import other files like **customized commands**.
-
-This object will make the tests clean since we don't need to import a lot of stuff on each test file.
-
-The setup will be like this:
-
-```
-import './commands';
-const pages = require('./pages/pages')
-
-const user = {
-	email: Cypress.env('AUTH_EMAIL'),
-	password: Cypress.env('AUTH_PASSWORD'),
-    username: Cypress.env('AUTH_USERNAME'),
-};
-
-const generateTestObject = () => ({
-	pages,
-	user,
-});
-
-beforeEach(() => {
-	cy.wrap(generateTestObject()).as('cyTest');
-});
-```
-
-- Add the *cypress/support/setup.js* as a support file in Cypress.json
-
-```
-{
-    "baseUrl": "https://demo.realworld.io/#/",
-    "supportFile": "cypress/support/setup.js"
-}
-```
-
-## Create commands folder
-
-- For a more organized commands you can create a commands folder in *support/commands* and inside it add the command types in files, for example, a *login* command will be added inside the *loggin_commands.js*.
-
+✔️ Defining what kind of modules we use in our project:
 <p align="left">
-  <img src="images/commands.png" />
+  <img src="img/q2.png" />
+</p>
+
+✔️ Defining if you are using some Framework:
+<p align="left">
+  <img src="img/q3.png" />
+</p>
+
+✔️ Defining whether we are using Typescript:
+<p align="left">
+  <img src="img/q4.png" />
+</p>
+
+✔️ Defining the destination of your code. Whether it will run in the browser or in Node:
+<p align="left">
+  <img src="img/q5.png" />
+</p>
+
+✔️ Defining the style that we will follow in our code:
+<p align="left">
+  <img src="img/q6.png" />
+</p>
+
+✔️ Choosing the style guide:
+<p align="left">
+  <img src="img/q7.png" />
+</p>
+
+✔️ Defining the file format in which you can perform some additional ESLint settings:
+<p align="left">
+  <img src="img/q8.png" />
 </p>
 
 
-A login_commands file will be like this:
+⚠️ After the previous step, you will be asked if you want to install the dependencies related to the chosen style guide, frameworks and TypeScript.
+
+✔️ Confirm
+<p align="left">
+  <img src="img/q9.png" />
+</p>
+
+## Config file:
+After the configuration, your project will have a file (.eslintrc) like this:
+
+- .eslintrc.json
 ```
-const pages = require('../pages/pages')
-
-Cypress.Commands.add('login', (username, password) => {
-    cy.visit(pages.home.url)
-
-    cy.get(pages.topNav.login).click()
-    cy.get(pages.login.email).type(username)
-    cy.get(pages.login.password).type(password)
-    cy.get(pages.login.loginButton).click()
-});
-```
-
-- Add the command file in the *commands.js* file:
-```
-// import 'cypress-commands'
-import './commands/login_commands'
-```
-
-Since all commands were imported from *setup.js* the cy.login() command will be available in all tests without any further imports.
-
-
-# Create test
-- Create the tests inside integration folder. Since we're using a global hook for before each, I prefer to create a file for each test. But this is a personal option.
-
-An example of a test for valid login with this setup will be:
-```
-describe('Conduit Login', () => {
-	it('validates a login with valid credentials', function () {
-		const { topNav } = this.cyTest.pages;
-		const email = this.cyTest.user.email;
-        const password = this.cyTest.user.password;
-		const username = this.cyTest.user.username;
-
-		cy.login(email, password);
-		cy.get(topNav.username).should('contain.text', username)
-	});
-});
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {}
+}
 ```
 
-# Executing this E2E tests
-- Launch the Cypress IDE (you can add this as a script in the *package.json*):
+## Eslint with Cypress
+By default eslint does not recognize cypress command
+
+<p align="left">
+  <img src="img/error_cypress.png" />
+</p>
+
+### ✅ Solution
+Just install puglin <a href="https://www.npmjs.com/package/eslint-plugin-cypress">eslint-plugin-cypress</a> and add an extension to the file .eslintrc
+
+- Install eslint-plugin-cypress
 ```
-npx cypress open
+npm install -D eslint-plugin-cypress
 ```
 
-And then, choose the test to run.
+- Add extension to the file .eslintrc
+
+"plugin:cypress/recommended" in extends
+```
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:cypress/recommended"
+        
+    ],
+```
+
+## Configuring VS Code with ESLint
+
+Install the ESLint extension in VS Code. To do this, in your VS Code, click on the extensions button, search for “eslint” and install the corresponding extension:
+
+<p align="left">
+  <img src="img/vscode.png" />
+</p>
 
 
-# To Do
-- Further information for optimization will be added in this repo later. And also, a linter and pipeline setup.
+## VS Code
+restart VS Code and you will see the warnings in your project code
+
+Example:
+
+<p align="left">
+  <img src="img/problems.png" />
+</p>
+
 
 
 ## Author
-<a target="_blank" href="https://github.com/diegohdb/diegohdb">👤 Diego Bezerra </a>
+<a target="_blank" href="https://github.com/jasonwillyan">👤 Jason Willyan </a>
 
-<a target="_blank" href="https://www.linkedin.com/in/diegohdb/">
-  <img align="left" alt="LinkdeIN" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />
-</a>
-
-<a target="_blank" href="https://www.instagram.com/diegohdb/">
-  <img align="left" alt="Instagram" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/instagram.svg" />
-</a>
-
-<a target="_blank" href="mailto:diegohdb@gmail.com">
+<a target="_blank" href="mailto:jasonwillyan@hotmail.com">
   <img align="left" alt="Gmail" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/gmail.svg" />
 </a>
 
