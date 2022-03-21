@@ -134,7 +134,7 @@ npm install -D eslint-plugin-cypress
 npx eslint file.js
 ```
 
-- Run Run ESLint in an folder
+- Run ESLint in an folder
 ```
 npx eslint "cypress\integration\**"
 ```
