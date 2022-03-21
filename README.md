@@ -139,7 +139,7 @@ Install the ESLint extension in VS Code. To do this, in your VS Code, click on t
 
 
 ## VS Code
-restart VS Code and you will see the warnings in your project code
+Restart VS Code and you will see the warnings in your project code
 
 Example:
 
