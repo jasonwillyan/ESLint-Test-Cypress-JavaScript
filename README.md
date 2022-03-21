@@ -1,76 +1,37 @@
-<h1 align="left">:computer: E2E-Test-Cypress-Support-File-Setup  </h1>
+<h1 align="left">:computer: ESLint-Test-Cypress-JavaScript  </h1>
 
-This is a simple and detailed tutorial for an E2E test project using Cypress with support file setup
+This is a simple and detailed tutorial to use ESLint in your code
 
 ## Introduction
 
-This project contains a tutorial for E2E test automation of the <a href="https://demo.realworld.io/#/">Conduit website</a>.
-The automation will cover only few tests since the main idea is to setup the framework from scratch with a support file setup and add the details for anyone that wants to create this setup by their own.
+This project contains a tutorial for installation and use code analysis tool <a href="eslint.org">ESLint</a>.
+ESLint statically analyzes your code to quickly find problems. ESLint is built into most text editors and you can run ESLint as part of your continuous integration pipeline.
+ESLint can to check syntax, find problems, and enforce code style.
 
 
 ## Environment Setup
 
 **Prerequisites:**
 * <a href="https://nodejs.org/en/download/"> NodeJS </a>
+* <a href="https://docs.npmjs.com/cli/v6/commands/npm-install"> npm </a>
 
-## Starting a NPM Project:
-- Start a npm project, issue the below command in project root directory.
+## Installing and Starting ESLint:
+- Install ESLint:
 ```
-npm init
-```
-
-The NPM will create a project, and you'll need to fill some info about your project.
-
-## Installing and Starting Cypress:
-- Install Cypress:
-```
-npm install cypress
+npm install -D eslint
 ```
 
-- Run Cypress to start the framework:
+- Initializing ESLint:
 ```
-npx cypress open
+npx eslint --init
 ```
+## Config ESLint:
+Configure eslint according to your project
 
-The Cypress IDE will be launched with some test files example.
+- defining for what purpose to use eslint
 <p align="left">
-  <img src="images/cypress_ide.png" />
+  <img src="images/q1.png" />
 </p>
-
-Delete example files (if you want to). On the IDE you can click in the button or you can delete the whole folder located on *cypress/integration*
-
-The project structure should be like this at this point:
-<p align="left">
-  <img src="images/project_tree.png" />
-</p>
-
-## Setup Base URL:
-
-- Add the test base_url in cypress.json file:
-Since we are going to test the Conduit website, the base url will be -*https://demo.realworld.io/#/*-
-```
-{
-    "baseUrl": "https://demo.realworld.io/#/"
-}
-```
-
-## Create and map the pages:
-- Add a *pages* folder in *cypress/support*
-
-<p align="left">
-  <img src="images/project_pages.png" />
-</p>
-
-- Create a *pageName.js* file for each page
-```
-export default {
-    email: '[type="email"]',
-    loginButton: '.btn-lg',
-    password: 'type="password"',
-    title: '.auth-page h1',
-    url: 'https://demo.realworld.io/#/login'
-};
-```
 
 - Create a *pages.js* to map all page files to be exported:
 ```
