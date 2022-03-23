@@ -160,6 +160,10 @@ To avoid false negative processes and unnecessary analysis in the project, we ca
 - requirements: repository where we will keep our API documentation;
 - .vscode: and VSCode editor configuration file that we will use when we configure the debug process.
 
+## Rules ESLint
+ESLint allows rules to be added 
+Learn more at <a href="https://eslint.org/docs/rules/">ESLint Rules</a>.
+
 ## Configuring VS Code with ESLint
 
 Install the ESLint extension in VS Code. To do this, in your VS Code, click on the extensions button, search for “eslint” and install the corresponding extension:
