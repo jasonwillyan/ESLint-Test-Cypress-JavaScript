@@ -14,6 +14,28 @@ ESLint can to check syntax, find problems, and enforce code style.
 **Prerequisites:**
 * <a href="https://docs.npmjs.com/cli/v6/commands/npm-install"> npm </a>
 
+## Flags npm
+
+`npm install` saves any specified packages into `dependencies` by default.
+Additionally, you can control where and how they get saved with some
+additional flags:
+
+* `-P, --save-prod`: Package will appear in your `dependencies`. This is the default unless `-D` or `-O` are present.
+* `-D, --save-dev`: Package will appear in your `devDependencies`.
+* `-O, --save-optional`: Package will appear in your `optionalDependencies`.
+* `--no-save`: Prevents saving to `dependencies`.
+
+**Learn more:**
+* <a href="https://docs.npmjs.com/cli/v6/commands/npm-install"> npm intall </a>
+
+## 📍dependencies: programs needed for production**
+
+`dependencies` are all the programs needed for the application to work. The application depends on them and they must be installed otherwise the application will not run.
+
+## 📍devDependencies: programs used for development**
+
+`devDependencies` are all the programs necessary for the "dev" environment, development, of the application. It can be everything from code compressors, transpilers, unit tests, debug tools, etc. These are not necessary for the application to work, but for development and/or testing.
+
 ## Installing and Starting ESLint:
 - Install ESLint:
 ```
