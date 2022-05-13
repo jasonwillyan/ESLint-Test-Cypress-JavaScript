@@ -28,13 +28,17 @@ additional flags:
 **Learn more:**
 * <a href="https://docs.npmjs.com/cli/v6/commands/npm-install"> npm intall </a>
 
-### 📌dependencies: programs needed for production**
+### 📌dependencies: programs needed for production
 
 `dependencies` are all the programs needed for the application to work. The application depends on them and they must be installed otherwise the application will not run.
 
-### 📌devDependencies: programs used for development**
+### 📌devDependencies: programs used for development
 
 `devDependencies` are all the programs necessary for the "dev" environment, development, of the application. It can be everything from code compressors, transpilers, unit tests, debug tools, etc. These are not necessary for the application to work, but for development and/or testing.
+
+### 📌optionalDependencies
+
+`optionalDependencies` are dependencies that don’t necessarily need to be installed. If a dependency can be used, but you would like npm to proceed if it cannot be found or fails to install, then you may put it in the `optionalDependencies` object.
 
 ## Installing and Starting ESLint:
 - Install ESLint:
