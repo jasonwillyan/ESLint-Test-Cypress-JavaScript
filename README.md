@@ -1,4 +1,4 @@
-<h1 align="left">:computer: ESLint-Test-Cypress-JavaScript  </h1>
+<h1 align="left">:computer: ESLint_JavaScript_Cypress  </h1>
 
 This is a simple and detailed tutorial to use ESLint in your code
 
