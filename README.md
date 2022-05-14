@@ -212,7 +212,7 @@ Example:
 <a target="_blank" href="https://github.com/jasonwillyan">👤 Jason Willyan </a>
 
 <a target="_blank" href="mailto:jasonwillyan@hotmail.com">
-  <img align="left" alt="Gmail" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/gmail.svg" />
+  <img align="left" alt="Gmail" width="80px" src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_r2.png" />
 </a>
 
 
